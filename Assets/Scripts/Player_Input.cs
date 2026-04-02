@@ -19,8 +19,8 @@ public class Player_Input : MonoBehaviour
     {
        
 
-        move = Input.GetAxis(moveAxis);
-        strafe = Input.GetAxis(strafeAxis);
+        move = Input.GetAxisRaw(moveAxis);
+        strafe = Input.GetAxisRaw(strafeAxis);
         fire = Input.GetButton(fireButton);
         //reload = Input.GetButton(reloadButton);
 

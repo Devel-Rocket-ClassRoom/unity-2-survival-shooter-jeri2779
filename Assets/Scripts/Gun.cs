@@ -36,6 +36,7 @@ public class Gun : MonoBehaviour
         gunAudioPlayer = GetComponent<AudioSource>();
 
         bulletLineRenderer = GetComponent<LineRenderer>();
+        //muzzleFlashEffect.Stop();
 
         bulletLineRenderer.positionCount = 2;
         bulletLineRenderer.enabled = false;
@@ -50,7 +51,6 @@ public class Gun : MonoBehaviour
         {
             lastFireTime = Time.time;
             Shot();
-
         }
     }
 
