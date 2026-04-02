@@ -4,6 +4,7 @@ using Unity.VectorGraphics;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverUI;
      
     public TextMeshProUGUI scoreText;
-    
-    
+
+    public AudioMixer audioMixer;
+
+
 
 
     private void Awake()
@@ -61,6 +64,19 @@ public class UIManager : MonoBehaviour
     public void OnClickRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("MusicVol", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFXVol", Mathf.Log10(volume) * 20);
+    }
+    public void SetSoundMute(bool isMute)
+    {
+        AudioListener.pause = isMute;
     }
 }
 

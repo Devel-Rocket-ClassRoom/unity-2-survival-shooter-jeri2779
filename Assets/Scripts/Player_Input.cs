@@ -26,11 +26,10 @@ public class Player_Input : MonoBehaviour
 
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //마우스 위치에서 카메라를 향해 Ray 생성
-        Plane groundPlane = new Plane(Vector3.up, transform.position);//플레이어의 위치를 지나는 수평 평면 생성
-        if (groundPlane.Raycast(ray, out float distance))
+        if(Physics.Raycast(ray, out RaycastHit hitInfo))
         {
-            mouseWorldPosition = ray.GetPoint(distance);//충돌 지점의 월드 좌표 계산
-        }
+            mouseWorldPosition = hitInfo.point; // Ray가 충돌한 지점의 월드 좌표
+        }   
 
 
     }

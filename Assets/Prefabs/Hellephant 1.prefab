@@ -173,7 +173,7 @@ Animator:
   m_GameObject: {fileID: 6292953352196851105}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b77f122f451a2394898a24191c26107c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 051d5ccca0c3c494fa3f1421c6639270, type: 2}
+  m_Controller: {fileID: 9100000, guid: 788aff27231398f4eb4c7424e083143a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -209,6 +209,7 @@ MonoBehaviour:
   attackDistance: 1.5
   attackDelay: 1
   score: 100
+  sinkSpeed: 2.5
 --- !u!195 &8404176569135669142
 NavMeshAgent:
   m_ObjectHideFlags: 0

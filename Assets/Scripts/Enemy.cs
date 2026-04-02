@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -28,6 +29,8 @@ public class Enemy : lifeManager
 
     private float damage;
     public int score;
+
+    public float sinkSpeed = 0.5f;
 
     private Status currentStatus;
 
@@ -63,10 +66,11 @@ public class Enemy : lifeManager
                     navMeshAgent.enabled = false;
                     foreach (var col in GetComponents<Collider>())
                     {
-                        col.enabled = false;
+                        col.isTrigger = true;
                     }
                     audio.enabled = false;
-                    gameObject.SetActive(false);
+                 
+                    //gameObject.SetActive(false);
                     break;
             }
         }
@@ -228,7 +232,7 @@ public class Enemy : lifeManager
         {
             hitEffect.transform.position = hitPoint;
             hitEffect.transform.forward = hitNormal;
-            //hitEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
+            hitEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
             hitEffect.Play();
         }
         base.OnDamage(damage, hitPoint, hitNormal);
@@ -237,6 +241,36 @@ public class Enemy : lifeManager
     {
         base.Die(); // isDead = true, OnDead 이벤트 발생
         CurrentStatus = Status.Die; // 사망 애니메이션 및 정리
+    }
+
+    public void StartSinking()
+    {
+        Debug.Log($"[Enemy] StartSinking 이벤트 수신! 가라앉기를 시작합니다.");
+        // 바닥으로 가라앉는 코루틴 실행
+        StartCoroutine(SinkCoroutine());
+    }
+
+    private IEnumerator SinkCoroutine()
+    {
+        foreach (var col in GetComponents<Collider>())
+        {
+            col.enabled = false;
+        }
+        float sinkDuration = 2.5f;
+        float timer = 0f;
+
+        while (timer < sinkDuration)
+        {
+            transform.position += Vector3.down * (sinkSpeed * Time.deltaTime);
+
+            //transform.Translate(Vector3.down * sinkSpeed * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return null;  
+        }
+
+      
+        Debug.Log($"[Enemy] 가라앉기 완료. 오브젝트를 비활성화합니다.");
+        gameObject.SetActive(false);
     }
 }
 
