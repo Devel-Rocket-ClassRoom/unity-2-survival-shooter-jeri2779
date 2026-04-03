@@ -177,6 +177,7 @@ MonoBehaviour:
   attackDistance: 1.5
   attackDelay: 1
   score: 100
+  sinkSpeed: 0.5
 --- !u!195 &586731414676050540
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -252,7 +253,7 @@ AudioSource:
   m_GameObject: {fileID: 8247072205431500086}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1841316315378845257, guid: a19bc3c1c19fde0409751813475ef1bb, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

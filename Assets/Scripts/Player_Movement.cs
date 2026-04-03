@@ -34,22 +34,21 @@ public class Player_Movement : MonoBehaviour
 
     private void Move()
     {
-        Transform cam = Camera.main.transform;
-        Vector3 ws = new Vector3(cam.forward.x, 0f, cam.forward.z).normalized;
-        Vector3 ad   = new Vector3(cam.right.x,   0f, cam.right.z).normalized;
+        Vector3 moveDir = new Vector3(playerInput.strafe, 0f, playerInput.move);
 
-        Vector3 moveDir = ws * playerInput.move + ad * playerInput.strafe;
         if (moveDir.sqrMagnitude > 0.001f)
             rb.MovePosition(rb.position + moveDir.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void Rotate()//마우스 좌표를 향해 플레이어가 회전
+ 
+
+    // PlayerMovement.cs Rotate()
+    private void Rotate()
     {
-        Vector3 lookDir = playerInput.mouseWorldPosition - transform.position;
-        lookDir.y = 0f;
-        if (lookDir.sqrMagnitude > 0.001f)
+        //Debug.Log($"aimDirection: {playerInput.aimDirection}");
+        if (playerInput.aimDirection.sqrMagnitude > 0.001f)
         {
-            rb.MoveRotation(Quaternion.LookRotation(lookDir));
+            rb.MoveRotation(Quaternion.LookRotation(playerInput.aimDirection));
         }
     }
 }
